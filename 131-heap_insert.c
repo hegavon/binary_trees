@@ -6,47 +6,13 @@
  */
 void heapify_up(heap_t *node)
 {
-	int temp;
-	heap_t *parent;
-
-	while (node && node->parent)
+	while (node->parent && node->n > node->parent->n)
 	{
-		parent = node->parent;
-
-		if (node->n > parent->n)
-		{
-			temp = node->n;
-			node->n = parent->n;
-			parent->n = temp;
-			node = parent;
-		}
-		else
-		{
-			break;
-		}
+		int temp = node->n;
+		node->n = node->parent->n;
+		node->parent->n = temp;
+		node = node->parent;
 	}
-}
-
-/**
- * insert_parent - Finds the parent node for a new node insertion.
- * @root: Pointer to the root node of the binary tree.
- * Return: Pointer to the parent node.
- */
-heap_t *insert_parent(heap_t *root)
-{
-	heap_t *parent = NULL;
-
-	if (!root)
-		return (NULL);
-
-	if (!root->left || !root->right)
-		return (root);
-
-	parent = insert_parent(root->left);
-	if (!parent)
-		parent = insert_parent(root->right);
-
-	return (parent);
 }
 
 /**
@@ -57,7 +23,7 @@ heap_t *insert_parent(heap_t *root)
  */
 heap_t *heap_insert(heap_t **root, int value)
 {
-	heap_t *node, *parent;
+	heap_t *node, *parent, *temp;
 
 	if (!root)
 		return (NULL);
@@ -69,15 +35,32 @@ heap_t *heap_insert(heap_t **root, int value)
 	if (!*root)
 		return (*root = node);
 
-	parent = insert_parent(*root);
+	/* Find parent of the last node */
+	parent = *root;
+	while (parent->left && parent->right)
+	{
+		if (!parent->left->left || !parent->left->right)
+			parent = parent->left;
+		else
+			parent = parent->right;
+	}
 
+	/* Insert node */
 	if (!parent->left)
 		parent->left = node;
 	else
 		parent->right = node;
 
 	node->parent = parent;
+
+	/* Perform heapify-up operation */
 	heapify_up(node);
+
+	/* Adjust root if necessary */
+	temp = node;
+	while (temp->parent)
+		temp = temp->parent;
+	*root = temp;
 
 	return (node);
 }
