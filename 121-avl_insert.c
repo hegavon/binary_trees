@@ -7,10 +7,10 @@ avl_t *avl_insert_recursive(avl_t **tree, avl_t *parent,
 avl_t *avl_insert(avl_t **tree, int value);
 
 /**
- * height - Measures the height of a binary tree.
- * @tree: A pointer to the root node of the tree to measure the height.
+ * height - It measures the height of a binary tree.
+ * @tree: This is a pointer to the root node of the tree to measure height.
  *
- * Return: If tree is NULL, your function must return 0, else return height.
+ * Return: If tree is NULL, return 0, else return height.
  */
 size_t height(const binary_tree_t *tree)
 {
@@ -26,8 +26,8 @@ size_t height(const binary_tree_t *tree)
 }
 
 /**
- * balance - Measures the balance factor of a binary tree.
- * @tree: A pointer to the root node of the tree to measure the balance factor.
+ * balance - It measures the balance factor of a binary tree.
+ * @tree: This is a pointer to the root node of the tree to measure balance.
  *
  * Return: If tree is NULL, return 0, else return balance factor.
  */
@@ -37,13 +37,13 @@ int balance(const binary_tree_t *tree)
 }
 
 /**
- * avl_insert_recursive - Inserts a value into an AVL tree recursively.
- * @tree: A double pointer to the root node of the AVL tree to insert into.
- * @parent: The parent node of the current working node.
- * @new: A double pointer to store the new node.
- * @value: The value to insert into the AVL tree.
+ * avl_insert_recursive - Recursive func to insert a value into an AVL tree.
+ * @tree: A pointer to the root node of the tree to insert into.
+ * @parent: A pointer to the parent node of the node to insert into.
+ * @new: A pointer to the new node to insert into the tree.
+ * @value: This is the value to insert into the tree.
  *
- * Return: A pointer to the new root after insertion, or NULL on failure.
+ * Return: A pointer to the new node, or NULL upon failure.
  */
 avl_t *avl_insert_recursive(avl_t **tree, avl_t *parent,
 		avl_t **new, int value)
@@ -88,11 +88,10 @@ avl_t *avl_insert_recursive(avl_t **tree, avl_t *parent,
 }
 
 /**
- * avl_insert - Inserts a value into an AVL tree.
- * @tree: A double pointer to the root node of the AVL tree to insert into.
- * @value: The value to insert into the AVL tree.
- *
- * Return: A pointer to the inserted node, or NULL on failure.
+ * avl_insert - It inserts a value into an AVL tree.
+ * @tree: A pointer to the root node of the tree to insert into.
+ * @value: This is the pointer to the value to insert into the tree.
+ * Return: A pointer to the new node, or NULL upon failure.
  */
 avl_t *avl_insert(avl_t **tree, int value)
 {
