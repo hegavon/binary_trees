@@ -1,10 +1,10 @@
 #include "binary_trees.h"
 
 /**
- * tree_height - measures the height of a binary tree
- * @tree: pointer to the root node of the tree to measure the height
+ * tree_height - It measures the height of a tree
+ * @tree: The pointer to the root node of the tree to measure
  *
- * Return: Height or 0 if tree is NULL
+ * Return: It returns the height of the tree
  */
 size_t tree_height(const heap_t *tree)
 {
@@ -26,12 +26,12 @@ size_t tree_height(const heap_t *tree)
 }
 
 /**
- * _preorder - goes through a binary tree using pre-order traversal
- * @tree: pointer to the root node of the tree to traverse
- * @node: will be the last node in traverse
- * @height: height of tree
+ * _preorder - This function is used to traverse the tree
+ * @tree: This is a pointer to the root node of the tree to traverse
+ * @node: It will be used to store the address of the node
+ * @height: It will be used to store the height of the tree
  *
- * Return: No Return
+ * Return: It has no return value
  */
 void _preorder(heap_t *tree, heap_t **node, size_t height)
 {
@@ -47,8 +47,8 @@ void _preorder(heap_t *tree, heap_t **node, size_t height)
 }
 
 /**
- * heapify - heapifies max binary heap
- * @root: pointer to binary heap
+ * heapify - This function is used to heapify the tree
+ * @root: This is a pointer to the root node of the tree to heapify
  */
 void heapify(heap_t *root)
 {
@@ -83,9 +83,9 @@ void heapify(heap_t *root)
 }
 
 /**
- * heap_extract - extracts the root node from a Max Binary Heap
- * @root: pointer to the heap root
- * Return: value of extracted node
+ * heap_extract - This function extracts the minimum value from the heap
+ * @root: This is a pointer to the root node of the tree to extract from
+ * Return: This function returns the minimum value from the heap
  **/
 int heap_extract(heap_t **root)
 {
