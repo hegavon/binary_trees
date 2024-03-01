@@ -22,6 +22,7 @@ bst_t *array_to_bst(int *array, size_t size)
 			while (tree != NULL)
 			{
 				bst_t *tmp = tree;
+
 				tree = tree->parent;
 				free(tmp);
 			}
