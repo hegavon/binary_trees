@@ -9,20 +9,25 @@
  */
 bst_t *array_to_bst(int *array, size_t size)
 {
-	bst_t *tree = NULL;
-	size_t i;
+    bst_t *tree = NULL;
+    size_t i;
 
-	if (array == NULL || size == 0)
-		return (NULL);
+    if (array == NULL || size == 0)
+        return (NULL);
 
-	for (i = 0; i < size; i++)
-	{
-		if (bst_insert(&tree, array[i]) == NULL)
-		{
-			binary_tree_delete(tree);
-			return (NULL);
-		}
-	}
+    for (i = 0; i < size; i++)
+    {
+        if (bst_insert(&tree, array[i]) == NULL)
+        {
+            while (tree != NULL)
+            {
+                bst_t *tmp = tree;
+                tree = tree->parent;
+                free(tmp);
+            }
+            return (NULL);
+        }
+    }
 
-	return (tree);
+    return (tree);
 }
