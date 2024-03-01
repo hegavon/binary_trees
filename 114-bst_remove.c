@@ -10,7 +10,7 @@ bst_t *inorder_successor(bst_t *root)
 {
 	while (root->left != NULL)
 		root = root->left;
-	return root;
+	return (root);
 }
 
 /**
@@ -57,7 +57,7 @@ bst_t *bst_delete(bst_t *root, bst_t *node)
 	successor = inorder_successor(node->right);
 	node->n = successor->n;
 
-	return bst_delete(root, successor);
+	return (bst_delete(root, successor));
 }
 
 /**
@@ -73,12 +73,12 @@ bst_t *bst_remove_recursive(bst_t *root, bst_t *node, int value)
 	if (node != NULL)
 	{
 		if (node->n == value)
-			return bst_delete(root, node);
+			return (bst_delete(root, node));
 		if (node->n > value)
-			return bst_remove_recursive(root, node->left, value);
-		return bst_remove_recursive(root, node->right, value);
+			return (bst_remove_recursive(root, node->left, value));
+		return (bst_remove_recursive(root, node->right, value));
 	}
-	return NULL;
+	return (NULL);
 }
 
 /**
@@ -90,5 +90,5 @@ bst_t *bst_remove_recursive(bst_t *root, bst_t *node, int value)
  */
 bst_t *bst_remove(bst_t *root, int value)
 {
-	return bst_remove_recursive(root, root, value);
+	return (bst_remove_recursive(root, root, value));
 }
