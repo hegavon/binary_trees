@@ -1,12 +1,11 @@
 #include "binary_trees.h"
 
 /**
- * heap_insert - inserts a value in Max Binary Heap
- * @root: a double pointer to the root node of the Heap to insert the value
- * @value: the value to store in the node to be inserted
+ * heap_insert - This function inserts a new node into the heap.
+ * @root: This is a pointer to the root node of the heap to insert into.
+ * @value: This is the value to insert into the heap.
  *
- * Return: a pointer to the created node
- *         NULL on failure
+ * Return: A pointer to the new node, or NULL upon failure.
  */
 heap_t *heap_insert(heap_t **root, int value)
 {
@@ -22,18 +21,17 @@ heap_t *heap_insert(heap_t **root, int value)
 	leaves = size;
 	for (level = 0, sub = 1; leaves >= sub; sub *= 2, level++)
 		leaves -= sub;
-	/* subtract all nodes except for bottom-most level */
+	/* Traverse tree to find the first leaf */
 
 	for (bit = 1 << (level - 1); bit != 1; bit >>= 1)
 		tree = leaves & bit ? tree->right : tree->left;
 	/*
 	 * Traverse tree to first empty slot based on the binary
 	 * representation of the number of leaves.
-	 * Example -
-	 * If there are 12 nodes in a complete tree, there are 5 leaves on
-	 * the 4th tier of the tree. 5 is 101 in binary. 1 corresponds to
-	 * right, 0 to left.
-	 * The first empty node is 101 == RLR, *root->right->left->right
+	 * For example, if the number of leaves is 10, then the binary
+	 * representation is 1010, so we traverse the tree to the left
+	 * child of the root node. 1 corresponds to the left child,
+	 * 0 corresponds to the right child.
 	 */
 
 	new = binary_tree_node(tree, value);
@@ -47,17 +45,16 @@ heap_t *heap_insert(heap_t **root, int value)
 		flip->parent->n = tmp;
 		new = new->parent;
 	}
-	/* Flip values with parent until parent value exceeds new value */
+	/* Flip the tree to restore the heap property */
 
 	return (new);
 }
 
 /**
- * binary_tree_size - measures the size of a binary tree
- * @tree: tree to measure the size of
+ * binary_tree_size - The func returns the number of nodes in a binary tree.
+ * @tree: This is a pointer to the root node of the tree to measure size.
  *
- * Return: size of the tree
- *         0 if tree is NULL
+ * Return: The number of nodes in the tree, or 0 if tree is NULL.
  */
 size_t binary_tree_size(const binary_tree_t *tree)
 {
