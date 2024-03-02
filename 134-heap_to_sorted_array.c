@@ -9,30 +9,30 @@
  */
 size_t tree_size(const binary_tree_t *tree)
 {
-    if (!tree)
-        return (0);
-    return (1 + tree_size(tree->left) + tree_size(tree->right));
+	if (!tree)
+		return (0);
+	return (1 + tree_size(tree->left) + tree_size(tree->right));
 }
 
 /**
- * heap_to_sorted_array - converts a Binary Max Heap to a sorted array of integers
- * @heap: pointer to the root node of the heap to convert
- * @size: address to store the size of the array
- *
- * Return: pointer to the sorted array in descending order, or NULL on failure
+ * heap_to_sorted_array - It converts a heap to a sorted array
+ * @heap: The pointer to the root node of the heap
+ * @size: The pointer to the size of the heap
+ * Return: It returns a pointer to the sorted array
  */
 int *heap_to_sorted_array(heap_t *heap, size_t *size)
 {
-    if (!heap || !size)
-        return (NULL);
+	if (!heap || !size)
+		return (NULL);
 
-    *size = tree_size(heap);
-    int *sorted_array = malloc(sizeof(int) * (*size));
-    if (!sorted_array)
-        return (NULL);
+	*size = tree_size(heap);
+	int *sorted_array = malloc(sizeof(int) * (*size));
 
-    for (size_t i = 0; i < *size; ++i)
-        sorted_array[i] = heap_extract(&heap);
+	if (!sorted_array)
+		return (NULL);
 
-    return (sorted_array);
+	for (size_t i = 0; i < *size; ++i)
+		sorted_array[i] = heap_extract(&heap);
+
+	return (sorted_array);
 }
