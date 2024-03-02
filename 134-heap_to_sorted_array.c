@@ -1,37 +1,55 @@
 #include "binary_trees.h"
-#include <stdlib.h>
 
 /**
- * tree_size - measures the size of a binary tree
- * @tree: pointer to the root node of the tree
+ * tree_size - measures the total number of nodes in a binary tree
+ * @tree: pointer to the root node of the tree to measure
  *
- * Return: size of the tree
+ * Return: The total number of nodes in the tree
  */
 size_t tree_size(const binary_tree_t *tree)
 {
-	if (!tree)
-		return (0);
-	return (1 + tree_size(tree->left) + tree_size(tree->right));
+	size_t count = 0;
+
+	if (tree)
+	{
+		count += 1; /* Count the current node */
+
+		/* Recursively count nodes in the left subtree */
+		count += tree_size(tree->left);
+
+		/* Recursively count nodes in the right subtree */
+		count += tree_size(tree->right);
+	}
+
+	return (count);
 }
 
 /**
- * heap_to_sorted_array - It converts a heap to a sorted array
- * @heap: The pointer to the root node of the heap
- * @size: The pointer to the size of the heap
- * Return: It returns a pointer to the sorted array
+ * heap_to_sorted_array - converts a Binary Max Heap
+ * to a sorted array of integers
+ *
+ * @heap: pointer to the root node of the heap to convert
+ * @size: address to store the size of the array
+ *
+ * Return: pointer to array sorted in descending order,
+ *         or NULL if heap is NULL or size is NULL
  */
 int *heap_to_sorted_array(heap_t *heap, size_t *size)
 {
+	int i, *sorted_array = NULL;
+
 	if (!heap || !size)
 		return (NULL);
 
-	*size = tree_size(heap);
-	int *sorted_array = malloc(sizeof(int) * (*size));
+	*size = tree_size(heap); /* Calculate the size of the array */
+
+	sorted_array = malloc(sizeof(int) * (*size));
 
 	if (!sorted_array)
 		return (NULL);
 
-	for (size_t i = 0; i < *size; ++i)
+	/* Extract elements from the heap and store them in the sorted array */
+	for (i = (*size) - 1; i >= 0; i--)
 		sorted_array[i] = heap_extract(&heap);
 
 	return (sorted_array);
